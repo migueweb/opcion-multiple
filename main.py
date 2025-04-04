@@ -34,15 +34,15 @@ def siInputValido(respuesta):
     return True 
 
 respuestas=[]
-print("\n***BIENVENIDO A EL CUESTIONARIO***\n")
+print("\t"*9,"***BIENVENIDO A EL CUESTIONARIO***\n")
 for i in PREGUNTAS:
-    print(i.get("pregunta"))
-    print(i.get("opcion1"))
-    print(i.get("opcion2"))
-    print(i.get("opcion3"))
-    print(i.get("opcion4"))
+    print("\t"*9, i.get("pregunta"))
+    print("\t"*9, i.get("opcion1"))
+    print("\t"*9, i.get("opcion2"))
+    print("\t"*9, i.get("opcion3"))
+    print("\t"*9, i.get("opcion4"))
     while True:
-        res=input("Ingrese su respuesta: ")
+        res=input("\n\t\t\t\t\t\t\t\t\t Ingrese su respuesta: ")
         esValido = siInputValido(res)
         if esValido:
             break
@@ -50,13 +50,12 @@ for i in PREGUNTAS:
     respuestas.append(res)
     print()
 
-print("***SUS RESPUESTAS SON:***\n")
+print("\t"*9,"***SUS RESPUESTAS SON:***\n")
 for i in range(len(PREGUNTAS)):
 
     # Solución 1
     # print(respuestas[i])
    
-
     if respuestas[i]==(PREGUNTAS[i].get("respuesta")):
         print(f"{respuestas[i]} ---> CORRECTA")
     else:
