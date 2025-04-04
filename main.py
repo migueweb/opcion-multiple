@@ -1,5 +1,6 @@
 ## Formulario de opcion multiple
 # 
+
 PREGUNTAS = [
     {
         "pregunta": "¿Cuál es la capital de Francia?",
@@ -29,20 +30,25 @@ PREGUNTAS = [
 
 def siInputValido(respuesta):
     mayuscula = respuesta.upper()
-    if mayuscula != 'A' and mayuscula != "B" and mayuscula != "C" and mayuscula != "D":
+    if mayuscula not in ['A', 'B', 'C', 'D']:
         return False
     return True 
 
-respuestas=[]
-print("\n***BIENVENIDO A EL CUESTIONARIO***\n")
+respuestas = []
+resultados = []
+contador_correctas = 0
+contador_incorrectas = 0
+
+print("\n*** BIENVENIDO AL CUESTIONARIO ***\n")
+
 for i in PREGUNTAS:
-    print(i.get("pregunta"))
-    print(i.get("opcion1"))
-    print(i.get("opcion2"))
-    print(i.get("opcion3"))
-    print(i.get("opcion4"))
+    print(i["pregunta"])
+    print(i["opcion1"])
+    print(i["opcion2"])
+    print(i["opcion3"])
+    print(i["opcion4"])
     while True:
-        res=input("Ingrese su respuesta: ")
+        res = input("Ingrese su respuesta: ").strip().upper()
         esValido = siInputValido(res)
         if esValido:
             break
@@ -50,17 +56,22 @@ for i in PREGUNTAS:
     respuestas.append(res)
     print()
 
-print("***SUS RESPUESTAS SON:***\n")
+print("*** RESULTADOS DEL CUESTIONARIO ***\n")
 for i in range(len(PREGUNTAS)):
-
-    # Solución 1
-    # print(respuestas[i])
-   
-
-    if respuestas[i]==(PREGUNTAS[i].get("respuesta")):
+    correcta = PREGUNTAS[i]["respuesta"]
+    
+    if respuestas[i] == correcta:
         print(f"{respuestas[i]} ---> CORRECTA")
+        resultados.append(True)
+        contador_correctas += 1
+        
     else:
-        print(f"{respuestas[i]} ---> INCORECTA")
+        print(f"{respuestas[i]} ---> INCORRECTA (Correcta: {correcta})")
+        resultados.append(False)
+        contador_incorrectas += 1
 
+total = contador_correctas + contador_incorrectas
+print(f"\nPREGUNTAS CORRECTAS: {contador_correctas} / {total}")
+print(f"PREGUNTAS INCORRECTAS: {contador_incorrectas} / {total}") 
 
-   
+print(resultados) 
