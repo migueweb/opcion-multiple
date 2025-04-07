@@ -55,6 +55,7 @@ for i in PREGUNTAS:
         res = input("\n\t\t\t\t\t\tIngrese su respuesta: ").strip().upper()
         es_valido = si_input_valido(res)
         if es_valido:
+
             break
         print("\t\t\t\t\t\tCaracter Invalido, la respuesta solo puede ser A,B,C o D")
     print("\t\t\t\t\t\tRespuesta registrada")
@@ -62,17 +63,16 @@ for i in PREGUNTAS:
     print()
 
 print("\t"*6,"*** RESULTADOS DEL CUESTIONARIO ***\n")
+
 for i in range(len(PREGUNTAS)):
     correcta = PREGUNTAS[i]["respuesta"]
     
     if respuestas[i] == correcta:
         print("\t"*6,f"Pregunta {i+1}: {respuestas[i]} -> ✅")
-        resultados.append(True)
         contador_correctas += 1
         
     else:
         print("\t"*6,f"Pregunta {i+1}: {respuestas[i]} -> ❌")
-        resultados.append(False)
         contador_incorrectas += 1
 
 total = contador_correctas + contador_incorrectas
@@ -83,3 +83,4 @@ print()
 
 total = 100*contador_correctas / total
 print("\t"*6,f"Porcentaje de aciertos: {total:.2f}%")
+
