@@ -1,5 +1,6 @@
 ## Formulario de opcion multiple
 # 
+
 PREGUNTAS = [
     {
         "pregunta": "¿Cuál es la capital de Francia?",
@@ -27,40 +28,59 @@ PREGUNTAS = [
     }
 ]
 
-def siInputValido(respuesta):
+def si_input_valido(respuesta):
     mayuscula = respuesta.upper()
-    if mayuscula != 'A' and mayuscula != "B" and mayuscula != "C" and mayuscula != "D":
+    if mayuscula not in ['A', 'B', 'C', 'D']:
         return False
     return True 
 
-respuestas=[]
-print("\n***BIENVENIDO A EL CUESTIONARIO***\n")
+respuestas = []
+resultados = []
+contador_correctas = 0
+contador_incorrectas = 0
+
+nombre = input("\t\t\t\t\t\t ¿Como te llamas?: ")
+print()
+print("\t"*6,"*** BIENVENIDO AL CUESTIONARIO ***\n")
+print("\t"*6,f"*** Te damos la bienvenida {nombre}...\n")
+print("\t"*6,"Espero estes listo para las siguientes preguntas...\n")
+
 for i in PREGUNTAS:
-    print(i.get("pregunta"))
-    print(i.get("opcion1"))
-    print(i.get("opcion2"))
-    print(i.get("opcion3"))
-    print(i.get("opcion4"))
+    print("\t"*6, i["pregunta"])
+    print("\t"*6, i["opcion1"])
+    print("\t"*6, i["opcion2"])
+    print("\t"*6, i["opcion3"])
+    print("\t"*6, i["opcion4"])
     while True:
-        res=input("Ingrese su respuesta: ")
-        esValido = siInputValido(res)
-        if esValido:
+        res = input("\n\t\t\t\t\t\tIngrese su respuesta: ").strip().upper()
+        es_valido = si_input_valido(res)
+        if es_valido:
+
             break
-        print("Respuesta no valida, Reintentelo")
+        print("\t\t\t\t\t\tCaracter Invalido, la respuesta solo puede ser A,B,C o D")
+    print("\t\t\t\t\t\tRespuesta registrada")
     respuestas.append(res)
     print()
 
-print("***SUS RESPUESTAS SON:***\n")
+print("\t"*6,"*** RESULTADOS DEL CUESTIONARIO ***\n")
+
 for i in range(len(PREGUNTAS)):
-
-    # Solución 1
-    # print(respuestas[i])
-   
-
-    if respuestas[i]==(PREGUNTAS[i].get("respuesta")):
-        print(f"{respuestas[i]} ---> CORRECTA")
+    correcta = PREGUNTAS[i]["respuesta"]
+    
+    if respuestas[i] == correcta:
+        print("\t"*6,f"Pregunta {i+1}: {respuestas[i]} -> ✅")
+        contador_correctas += 1
+        
     else:
-        print(f"{respuestas[i]} ---> INCORECTA")
+        print("\t"*6,f"Pregunta {i+1}: {respuestas[i]} -> ❌")
+        contador_incorrectas += 1
 
+total = contador_correctas + contador_incorrectas
+print()
+print("\t"*6,f"✅ PREGUNTAS CORRECTAS: {contador_correctas} / {total}")
+print("\t"*6,f"❌ PREGUNTAS INCORRECTAS: {contador_incorrectas} / {total}") 
+print()
 
-   
+total = 100*contador_correctas / total
+print("\t"*6,f"Porcentaje de aciertos: {total:.2f}%")
+
